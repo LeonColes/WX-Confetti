@@ -48,7 +48,7 @@ Page({
   // 获取屏幕尺寸并设置全屏canvas
   initScreenSize() {
     try {
-      const info = wx.getSystemInfoSync();
+      const info = wx.getWindowInfo();
       this.setData({
         canvasWidth: info.windowWidth,
         canvasHeight: info.windowHeight

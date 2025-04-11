@@ -10,14 +10,14 @@
       
       <view class="docs-text">这是一个适用于微信小程序的五彩纸屑/彩花效果组件，基于canvas技术实现。可以在各种场景中使用，比如庆祝成就、完成任务、节日氛围、游戏胜利、活动开启等。该组件性能优良，支持自定义颜色、形状、运动轨迹等多种参数。</view>
       
-          <!-- 基本效果按钮 -->
-    <view class="buttons-container">
-      <button class="effect-button" bindtap="fireBasic" data-type="basic">基本效果</button>
-      <button class="effect-button" bindtap="fireSchool" data-type="school">校园效果</button>
-      <button class="effect-button" bindtap="fireFireworks" data-type="fireworks">烟花效果</button>
-      <button class="effect-button" bindtap="fireSnow" data-type="snow">雪花效果</button>
-      <button class="effect-button" bindtap="fireRealistic" data-type="realistic">真实效果</button>
-    </view>
+      <!-- 基本效果按钮 -->
+      <view class="buttons-container">
+        <button class="effect-button" bindtap="fireBasic" data-type="basic">基本效果</button>
+        <button class="effect-button" bindtap="fireSchool" data-type="school">校园效果</button>
+        <button class="effect-button" bindtap="fireFireworks" data-type="fireworks">烟花效果</button>
+        <button class="effect-button" bindtap="fireSnow" data-type="snow">雪花效果</button>
+        <button class="effect-button" bindtap="fireRealistic" data-type="realistic">真实效果</button>
+      </view>
 
       <view class="docs-subtitle">组件特性</view>
       <view class="feature-list">
@@ -221,9 +221,10 @@ this.confetti.fire({
       
       <view class="docs-text">1. 连续触发多重效果：</view>
       <view class="code-block">
-// 从同一个位置发射多重效果
-<!-- for (let i = 0; i <= 5; i++) {
-  setTimeout(() => {
+// 从同一个位置发射多重效果（请在TS/JS文件中实现，而非WXML中）
+// 以下代码已在index.ts的fireMultiEffect方法中实现：
+for (let i = 0; i &lt;= 5; i++) {
+  setTimeout(() =&gt; {
     this.confetti.fire({
       particleCount: 20,
       angle: 90 + i * 15,
@@ -231,8 +232,10 @@ this.confetti.fire({
       origin: { x: 0.5, y: 0.5 }
     });
   }, i * 150);
-} -->
+}
       </view>
+      
+      <button class="effect-button" bindtap="fireMultiEffect">触发多重效果</button>
       
       <view class="docs-text">2. 从多个位置同时发射：</view>
       <view class="code-block">

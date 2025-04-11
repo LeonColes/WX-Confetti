@@ -1,6 +1,6 @@
 # Canvas Confetti 微信小程序组件
 
-这是一个兼容微信小程序的canvas-confetti组件，可以在小程序中实现五彩纸屑特效。移植自 [canvas-confetti](https://github.com/catdad/canvas-confetti) 库。
+这是一个兼容微信小程序的canvas-confetti组件，可以在小程序中实现五彩纸屑特效。移植自 [vx-confetti](https://github.com/catdad/vx-confetti) 库。
 
 ## 功能特点
 
@@ -17,7 +17,7 @@
 ```json
 {
   "usingComponents": {
-    "canvas-confetti": "/components/canvas-confetti/canvas-confetti"
+    "vx-confetti": "/components/vx-confetti/vx-confetti"
   }
 }
 ```
@@ -25,7 +25,7 @@
 ### 2. 在WXML中使用组件
 
 ```html
-<canvas-confetti id="confetti" width="{{canvasWidth}}" height="{{canvasHeight}}"></canvas-confetti>
+<vx-confetti id="confetti" width="{{canvasWidth}}" height="{{canvasHeight}}"></vx-confetti>
 ```
 
 ### 3. 在JS中调用组件方法
@@ -156,4 +156,4 @@ this.confetti.fire(options)
 
 1. 适当控制particleCount数量，避免过多纸屑导致性能下降
 2. 不需要显示时及时调用reset()方法释放资源
-3. 在低端设备上可以降低参数或减少使用频率 
+3. 在低端设备上可以降低参数或减少使用频率
