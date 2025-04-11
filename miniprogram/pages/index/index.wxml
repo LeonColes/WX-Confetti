@@ -1,0 +1,281 @@
+<!--index.wxml-->
+<scroll-view class="scrollarea" scroll-y type="list">
+  <view class="container">
+    <!-- Canvas组件，设置全屏 -->
+    <vx-confetti id="confetti" width="{{canvasWidth}}" height="{{canvasHeight}}"></vx-confetti>
+    
+    <!-- 介绍和使用说明文档 -->
+    <view class="docs-section">
+      <view class="docs-title">五彩纸屑效果 (Canvas Confetti)</view>
+      
+      <view class="docs-text">这是一个适用于微信小程序的五彩纸屑/彩花效果组件，基于canvas技术实现。可以在各种场景中使用，比如庆祝成就、完成任务、节日氛围、游戏胜利、活动开启等。该组件性能优良，支持自定义颜色、形状、运动轨迹等多种参数。</view>
+      
+          <!-- 基本效果按钮 -->
+    <view class="buttons-container">
+      <button class="effect-button" bindtap="fireBasic" data-type="basic">基本效果</button>
+      <button class="effect-button" bindtap="fireSchool" data-type="school">校园效果</button>
+      <button class="effect-button" bindtap="fireFireworks" data-type="fireworks">烟花效果</button>
+      <button class="effect-button" bindtap="fireSnow" data-type="snow">雪花效果</button>
+      <button class="effect-button" bindtap="fireRealistic" data-type="realistic">真实效果</button>
+    </view>
+
+      <view class="docs-subtitle">组件特性</view>
+      <view class="feature-list">
+        <view class="feature-item">✓ 支持从任意位置发射五彩纸屑</view>
+        <view class="feature-item">✓ 可自定义粒子数量、颜色、形状和大小</view>
+        <view class="feature-item">✓ 提供物理参数调整：重力、衰减、漂移等</view>
+        <view class="feature-item">✓ 支持连续触发效果叠加</view>
+        <view class="feature-item">✓ 多种预设效果：基础、烟花、雪花等</view>
+        <view class="feature-item">✓ 高性能实现，不影响页面交互</view>
+      </view>
+
+      <view class="docs-subtitle">基本用法</view>
+      <view class="docs-text">1. 在页面JSON中引入组件：</view>
+      <view class="code-block">
+{
+  "usingComponents": {
+    "vx-confetti": "/components/vx-confetti/vx-confetti"
+  }
+}
+      </view>
+      
+      <view class="docs-text">2. 在WXML中添加组件：</view>
+      <view class="code-block">
+&lt;vx-confetti id="confetti" width="{{canvasWidth}}" height="{{canvasHeight}}"&gt;&lt;/vx-confetti&gt;
+      </view>
+      
+      <view class="docs-text">3. 在JS中获取组件实例并调用方法：</view>
+      <view class="code-block">
+// 获取组件实例
+this.confetti = this.selectComponent('#confetti');
+
+// 触发效果
+this.confetti.fire({
+  particleCount: 100,
+  spread: 70,
+  origin: { x: 0.5, y: 0.5 }
+});
+      </view>
+      
+      <view class="docs-text">4. 效果会从设定的原点位置开始发射</view>
+      <view class="docs-text">5. 支持连续点击，可以叠加多种效果</view>
+
+      <view class="docs-subtitle">完整API文档</view>
+      
+      <view class="api-section">
+        <view class="api-title">组件属性</view>
+        <view class="params-table">
+          <view class="params-row">
+            <view class="params-name">width</view>
+            <view class="params-desc">画布宽度（默认300）</view>
+          </view>
+          <view class="params-row">
+            <view class="params-name">height</view>
+            <view class="params-desc">画布高度（默认300）</view>
+          </view>
+          <view class="params-row">
+            <view class="params-name">id</view>
+            <view class="params-desc">组件ID（默认confettiCanvas）</view>
+          </view>
+        </view>
+      </view>
+      
+      <view class="api-section">
+        <view class="api-title">组件方法</view>
+        <view class="params-table">
+          <view class="params-row">
+            <view class="params-name">fire(options)</view>
+            <view class="params-desc">触发五彩纸屑效果，返回Promise</view>
+          </view>
+          <view class="params-row">
+            <view class="params-name">reset()</view>
+            <view class="params-desc">重置画布，清除所有效果</view>
+          </view>
+        </view>
+      </view>
+      
+      <view class="api-section">
+        <view class="api-title">fire方法参数</view>
+        <view class="params-table">
+          <view class="params-row">
+            <view class="params-name">particleCount</view>
+            <view class="params-desc">粒子数量，范围1-1000，默认50。数量越多效果越密集，但也会消耗更多性能</view>
+          </view>
+          <view class="params-row">
+            <view class="params-name">angle</view>
+            <view class="params-desc">发射角度，单位度，默认90度（向上）。0度为向右，90度为向上，180度为向左，270度为向下</view>
+          </view>
+          <view class="params-row">
+            <view class="params-name">spread</view>
+            <view class="params-desc">扩散角度，单位度，默认45度。该值越大，粒子分布范围越广</view>
+          </view>
+          <view class="params-row">
+            <view class="params-name">startVelocity</view>
+            <view class="params-desc">初始速度，默认45。该值越大，粒子初始速度越快，飞得越远</view>
+          </view>
+          <view class="params-row">
+            <view class="params-name">colors</view>
+            <view class="params-desc">颜色数组，接受十六进制颜色值，如['#ff0000', '#00ff00', '#0000ff']</view>
+          </view>
+          <view class="params-row">
+            <view class="params-name">shapes</view>
+            <view class="params-desc">形状数组，支持'square'（方形）、'circle'（圆形）和'star'（星形），默认['square', 'circle']</view>
+          </view>
+          <view class="params-row">
+            <view class="params-name">gravity</view>
+            <view class="params-desc">重力大小，默认1。该值越大，粒子下落越快</view>
+          </view>
+          <view class="params-row">
+            <view class="params-name">decay</view>
+            <view class="params-desc">速度衰减率，范围0-1，默认0.9。该值越小，粒子减速越快</view>
+          </view>
+          <view class="params-row">
+            <view class="params-name">drift</view>
+            <view class="params-desc">横向漂移量，默认0。正值向右漂移，负值向左漂移</view>
+          </view>
+          <view class="params-row">
+            <view class="params-name">ticks</view>
+            <view class="params-desc">生命周期，默认200。该值越大，动画持续时间越长</view>
+          </view>
+          <view class="params-row">
+            <view class="params-name">scalar</view>
+            <view class="params-desc">粒子大小缩放，默认1。该值越大，粒子越大</view>
+          </view>
+          <view class="params-row">
+            <view class="params-name">flat</view>
+            <view class="params-desc">平面效果，默认false。启用后粒子不会旋转</view>
+          </view>
+          <view class="params-row">
+            <view class="params-name">origin</view>
+            <view class="params-desc">发射原点，格式{x: 0.5, y: 0.5}。x和y都是相对于画布的比例值，范围0-1</view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 参数示例区域 -->
+      <view class="docs-subtitle">参数示例</view>
+      
+      <!-- 粒子数量示例 -->
+      <view class="example-section">
+        <view class="example-title">粒子数量 (particleCount)</view>
+        <view class="example-buttons">
+          <button class="effect-button" bindtap="fireParamExample" data-param="count" data-value="10">较少 (10)</button>
+          <button class="effect-button" bindtap="fireParamExample" data-param="count" data-value="100">中等 (100)</button>
+          <button class="effect-button" bindtap="fireParamExample" data-param="count" data-value="300">较多 (300)</button>
+        </view>
+      </view>
+      
+      <!-- 形状示例 -->
+      <view class="example-section">
+        <view class="example-title">形状 (shapes)</view>
+        <view class="example-buttons">
+          <button class="effect-button" bindtap="fireParamExample" data-param="shape" data-value="square">方形</button>
+          <button class="effect-button" bindtap="fireParamExample" data-param="shape" data-value="circle">圆形</button>
+          <button class="effect-button" bindtap="fireParamExample" data-param="shape" data-value="star">星形</button>
+          <button class="effect-button" bindtap="fireParamExample" data-param="shape" data-value="mixed">混合</button>
+        </view>
+      </view>
+      
+      <!-- 扩散角度示例 -->
+      <view class="example-section">
+        <view class="example-title">扩散角度 (spread)</view>
+        <view class="example-buttons">
+          <button class="effect-button" bindtap="fireParamExample" data-param="spread" data-value="20">窄 (20°)</button>
+          <button class="effect-button" bindtap="fireParamExample" data-param="spread" data-value="90">中等 (90°)</button>
+          <button class="effect-button" bindtap="fireParamExample" data-param="spread" data-value="180">广 (180°)</button>
+        </view>
+      </view>
+      
+      <!-- 重力示例 -->
+      <view class="example-section">
+        <view class="example-title">重力 (gravity)</view>
+        <view class="example-buttons">
+          <button class="effect-button" bindtap="fireParamExample" data-param="gravity" data-value="0.3">低重力 (0.3)</button>
+          <button class="effect-button" bindtap="fireParamExample" data-param="gravity" data-value="1">正常 (1)</button>
+          <button class="effect-button" bindtap="fireParamExample" data-param="gravity" data-value="3">高重力 (3)</button>
+        </view>
+      </view>
+      
+      <!-- 速度和衰减示例 -->
+      <view class="example-section">
+        <view class="example-title">初始速度 (startVelocity)</view>
+        <view class="example-buttons">
+          <button class="effect-button" bindtap="fireParamExample" data-param="velocity" data-value="15">慢 (15)</button>
+          <button class="effect-button" bindtap="fireParamExample" data-param="velocity" data-value="45">中等 (45)</button>
+          <button class="effect-button" bindtap="fireParamExample" data-param="velocity" data-value="90">快 (90)</button>
+        </view>
+      </view>
+      
+      <!-- 角度示例 -->
+      <view class="example-section">
+        <view class="example-title">发射角度 (angle)</view>
+        <view class="example-buttons">
+          <button class="effect-button" bindtap="fireParamExample" data-param="angle" data-value="0">向右 (0°)</button>
+          <button class="effect-button" bindtap="fireParamExample" data-param="angle" data-value="90">向上 (90°)</button>
+          <button class="effect-button" bindtap="fireParamExample" data-param="angle" data-value="180">向左 (180°)</button>
+          <button class="effect-button" bindtap="fireParamExample" data-param="angle" data-value="270">向下 (270°)</button>
+        </view>
+      </view>
+      
+      <view class="docs-subtitle">高级用法</view>
+      
+      <view class="docs-text">1. 连续触发多重效果：</view>
+      <view class="code-block">
+// 从同一个位置发射多重效果
+<!-- for (let i = 0; i <= 5; i++) {
+  setTimeout(() => {
+    this.confetti.fire({
+      particleCount: 20,
+      angle: 90 + i * 15,
+      spread: 50,
+      origin: { x: 0.5, y: 0.5 }
+    });
+  }, i * 150);
+} -->
+      </view>
+      
+      <view class="docs-text">2. 从多个位置同时发射：</view>
+      <view class="code-block">
+// 从左右两侧向中间发射
+this.confetti.fire({
+  particleCount: 50,
+  angle: 60,
+  spread: 55,
+  origin: { x: 0, y: 0.6 }
+});
+
+this.confetti.fire({
+  particleCount: 50,
+  angle: 120,
+  spread: 55,
+  origin: { x: 1, y: 0.6 }
+});
+      </view>
+      
+      <view class="docs-subtitle">最佳实践</view>
+      <view class="docs-text">1. 性能优化：粒子数量会影响性能，建议在移动设备上将particleCount控制在200以内</view>
+      <view class="docs-text">2. 全屏效果：将组件设为固定定位，并设置pointer-events: none确保不影响交互</view>
+      <view class="docs-text">3. 连续点击：组件支持连续点击叠加效果，但过多粒子可能影响性能</view>
+      <view class="docs-text">4. 形状使用：星形比其他形状更消耗性能，大量使用时注意性能影响</view>
+      <view class="docs-text">5. 使用场景：适合作为庆祝、成就达成、游戏胜利等关键时刻的视觉强化</view>
+      
+      <view class="docs-subtitle">常见问题</view>
+      <view class="qa-item">
+        <view class="qa-question">Q: 为什么我的效果无法显示？</view>
+        <view class="qa-answer">A: 请确保在页面的JSON文件中正确注册了组件，并且组件ID与JS中获取的一致。</view>
+      </view>
+      <view class="qa-item">
+        <view class="qa-question">Q: 如何让效果覆盖整个屏幕？</view>
+        <view class="qa-answer">A: 在样式中将canvas设为固定定位并设置宽高为100%，同时在组件初始化时设置正确的屏幕尺寸。</view>
+      </view>
+      <view class="qa-item">
+        <view class="qa-question">Q: 效果能持续多久？</view>
+        <view class="qa-answer">A: 默认生命周期为200帧，约3-4秒。可通过ticks参数调整持续时间。</view>
+      </view>
+      <view class="qa-item">
+        <view class="qa-question">Q: 如何在特定元素上方触发效果？</view>
+        <view class="qa-answer">A: 获取元素相对于屏幕的位置，然后计算出origin的x和y值（0-1范围内的比例值）。</view>
+      </view>
+    </view>
+  </view>
+</scroll-view>

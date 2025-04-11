@@ -1,0 +1,203 @@
+/**index.wxss**/
+.scrollarea {
+  height: 100vh;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Canvas 容器 */
+#confetti {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: none; /* 确保canvas不会阻挡点击事件 */
+}
+
+/* 按钮容器 */
+.buttons-container {
+  position: relative;
+  z-index: 10;
+  width: 94%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16rpx;
+  padding: 30rpx 0;
+  margin: 20rpx auto;
+}
+
+/* 特效按钮 */
+.effect-button {
+  min-width: 160rpx;
+  margin: 0;
+  font-size: 28rpx;
+  background-color: #4a90e2;
+  color: white;
+  border-radius: 40rpx;
+  box-shadow: 0 4rpx 10rpx rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.effect-button:active {
+  transform: scale(0.95);
+  box-shadow: 0 2rpx 5rpx rgba(0, 0, 0, 0.3);
+}
+
+/* 文档区域 */
+.docs-section {
+  position: relative;
+  z-index: 5;
+  margin: 30rpx auto;
+  width: 94%;
+  padding: 20rpx;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 20rpx;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.1);
+}
+
+.docs-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+  color: #333;
+}
+
+.docs-subtitle {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin: 30rpx 0 16rpx;
+  color: #444;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10rpx;
+}
+
+.docs-text {
+  font-size: 28rpx;
+  line-height: 1.6;
+  color: #666;
+  margin-bottom: 16rpx;
+}
+
+/* 特性列表 */
+.feature-list {
+  margin: 20rpx 0;
+}
+
+.feature-item {
+  font-size: 28rpx;
+  line-height: 1.6;
+  color: #666;
+  margin-bottom: 12rpx;
+  padding-left: 10rpx;
+}
+
+/* 代码块 */
+.code-block {
+  background-color: #f5f7f9;
+  border-radius: 8rpx;
+  padding: 20rpx;
+  margin: 16rpx 0 24rpx;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 26rpx;
+  color: #333;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-all;
+  overflow-x: auto;
+}
+
+/* API区域 */
+.api-section {
+  margin-bottom: 30rpx;
+}
+
+.api-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #4a90e2;
+  margin: 20rpx 0 10rpx;
+}
+
+/* 参数表格 */
+.params-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20rpx 0;
+  font-size: 28rpx;
+  background-color: #f9f9f9;
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+
+.params-row {
+  display: flex;
+  border-bottom: 1rpx solid #eee;
+  padding: 16rpx 10rpx;
+}
+
+.params-row:last-child {
+  border-bottom: none;
+}
+
+.params-name {
+  width: 30%;
+  font-weight: bold;
+  color: #4a90e2;
+}
+
+.params-desc {
+  width: 70%;
+  color: #666;
+}
+
+/* 示例区域 */
+.example-section {
+  margin: 30rpx 0;
+  background-color: #f5f7f9;
+  border-radius: 12rpx;
+  padding: 16rpx;
+}
+
+.example-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  margin-bottom: 16rpx;
+  color: #333;
+}
+
+.example-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  margin-bottom: 20rpx;
+}
+
+/* 问答部分 */
+.qa-item {
+  margin-bottom: 20rpx;
+  border-bottom: 1px dashed #eee;
+  padding-bottom: 16rpx;
+}
+
+.qa-question {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.qa-answer {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.6;
+  padding-left: 16rpx;
+} 
