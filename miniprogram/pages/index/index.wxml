@@ -2,7 +2,7 @@
 <scroll-view class="scrollarea" scroll-y type="list">
   <view class="container">
     <!-- Canvas组件，设置全屏 -->
-    <vx-confetti id="confetti" width="{{canvasWidth}}" height="{{canvasHeight}}"></vx-confetti>
+    <vx-confetti id="confetti" class="confetti-canvas" width="{{canvasWidth}}" height="{{canvasHeight}}"></vx-confetti>
     
     <!-- 介绍和使用说明文档 -->
     <view class="docs-section">
@@ -234,8 +234,6 @@ for (let i = 0; i &lt;= 5; i++) {
   }, i * 150);
 }
       </view>
-      
-      <button class="effect-button" bindtap="fireMultiEffect">触发多重效果</button>
       
       <view class="docs-text">2. 从多个位置同时发射：</view>
       <view class="code-block">

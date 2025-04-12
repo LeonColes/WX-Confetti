@@ -33,8 +33,6 @@ Page({
     canvasWidth: 0,
     canvasHeight: 0,
     motto: '欢迎使用五彩纸屑效果',
-    canIUseGetUserProfile: wx.canIUse('getUserProfile'),
-    canIUseNicknameComp: wx.canIUse('input.type.nickname')
   },
   
   // 使用any类型避免TypeScript错误

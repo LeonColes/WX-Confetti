@@ -82,6 +82,17 @@ Component({
             canvas.width = this.properties.width;
             canvas.height = this.properties.height;
             
+            // 优化真机显示 - 考虑设备像素比
+            try {
+              const deviceInfo = wx.getDeviceInfo();
+              const dpr = deviceInfo.pixelRatio || 1;
+              canvas.width = this.properties.width * dpr;
+              canvas.height = this.properties.height * dpr;
+              ctx.scale(dpr, dpr);
+            } catch (e) {
+              console.error('设置DPR失败', e);
+            }
+            
             this.canvas = canvas;
             this.ctx = ctx;
             
