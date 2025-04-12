@@ -27,6 +27,17 @@
         <view class="feature-item">✓ 支持连续触发效果叠加</view>
         <view class="feature-item">✓ 多种预设效果：基础、烟花、雪花等</view>
         <view class="feature-item">✓ 高性能实现，不影响页面交互</view>
+        <view class="feature-item">✓ 优化真机显示，解决了层级渲染问题</view>
+        <view class="feature-item">✓ 使用最新API替代已废弃的系统API</view>
+      </view>
+
+      <view class="docs-subtitle">基础库要求</view>
+      <view class="docs-text">本组件需要微信小程序基础库版本 <text class="highlight">2.9.0</text> 或更高版本，主要是因为使用了type="2d"的新版canvas。</view>
+      <view class="docs-text">组件中已适配最新API，将已废弃的API替换为推荐使用的新API：</view>
+      <view class="feature-list">
+        <view class="feature-item">✓ 使用 wx.getDeviceInfo() 代替 wx.getSystemInfoSync()</view>
+        <view class="feature-item">✓ 使用 wx.getWindowInfo() 获取窗口信息</view>
+        <view class="feature-item">✓ 使用类选择器替代ID选择器，符合组件样式规范</view>
       </view>
 
       <view class="docs-subtitle">基本用法</view>
@@ -41,11 +52,35 @@
       
       <view class="docs-text">2. 在WXML中添加组件：</view>
       <view class="code-block">
-&lt;vx-confetti id="confetti" width="{{canvasWidth}}" height="{{canvasHeight}}"&gt;&lt;/vx-confetti&gt;
+&lt;vx-confetti id="confetti" class="confetti-canvas" width="{{canvasWidth}}" height="{{canvasHeight}}"&gt;&lt;/vx-confetti&gt;
       </view>
       
-      <view class="docs-text">3. 在JS中获取组件实例并调用方法：</view>
+      <view class="docs-text">3. 在页面样式中添加（可选，组件已有内置样式）：</view>
       <view class="code-block">
+.confetti-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 9999;
+  pointer-events: none; /* 确保canvas不会阻挡点击事件 */
+}
+      </view>
+      
+      <view class="docs-text">4. 在JS中获取组件实例并调用方法：</view>
+      <view class="code-block">
+// 获取屏幕尺寸
+try {
+  const info = wx.getWindowInfo();
+  this.setData({
+    canvasWidth: info.windowWidth,
+    canvasHeight: info.windowHeight
+  });
+} catch (e) {
+  console.error('获取屏幕尺寸失败', e);
+}
+
 // 获取组件实例
 this.confetti = this.selectComponent('#confetti');
 
@@ -57,8 +92,8 @@ this.confetti.fire({
 });
       </view>
       
-      <view class="docs-text">4. 效果会从设定的原点位置开始发射</view>
-      <view class="docs-text">5. 支持连续点击，可以叠加多种效果</view>
+      <view class="docs-text">5. 效果会从设定的原点位置开始发射</view>
+      <view class="docs-text">6. 支持连续点击，可以叠加多种效果</view>
 
       <view class="docs-subtitle">完整API文档</view>
       
@@ -221,8 +256,7 @@ this.confetti.fire({
       
       <view class="docs-text">1. 连续触发多重效果：</view>
       <view class="code-block">
-// 从同一个位置发射多重效果（请在TS/JS文件中实现，而非WXML中）
-// 以下代码已在index.ts的fireMultiEffect方法中实现：
+// 从同一个位置发射多重效果
 for (let i = 0; i &lt;= 5; i++) {
   setTimeout(() =&gt; {
     this.confetti.fire({
@@ -253,30 +287,62 @@ this.confetti.fire({
 });
       </view>
       
+      <view class="docs-subtitle">真机调试注意事项</view>
+      <view class="docs-text">组件已经解决了真机上canvas图层不在顶层的问题，通过以下方式：</view>
+      <view class="feature-list">
+        <view class="feature-item">✓ 将canvas通过position: fixed定位在最上层</view>
+        <view class="feature-item">✓ 使用z-index: 9999确保层级优先级</view>
+        <view class="feature-item">✓ 添加pointer-events: none保证交互穿透</view>
+        <view class="feature-item">✓ 设置设备像素比(DPR)优化显示效果</view>
+      </view>
+      <view class="docs-text">组件也已经支持最新API，避免使用已废弃的API引起警告。</view>
+      
+      <view class="docs-subtitle">CSS选择器注意事项</view>
+      <view class="docs-text">在微信小程序组件中，某些选择器是不允许使用的，包括：</view>
+      <view class="feature-list">
+        <view class="feature-item">✗ 标签名选择器（如 canvas{}）</view>
+        <view class="feature-item">✗ ID选择器（如 #confetti{}）</view>
+        <view class="feature-item">✗ 属性选择器（如 [id="confetti"]{}）</view>
+      </view>
+      <view class="docs-text">应始终使用类选择器（如 .confetti-canvas{}）来设置样式，本组件已遵循此规范。</view>
+      
       <view class="docs-subtitle">最佳实践</view>
       <view class="docs-text">1. 性能优化：粒子数量会影响性能，建议在移动设备上将particleCount控制在200以内</view>
       <view class="docs-text">2. 全屏效果：将组件设为固定定位，并设置pointer-events: none确保不影响交互</view>
       <view class="docs-text">3. 连续点击：组件支持连续点击叠加效果，但过多粒子可能影响性能</view>
       <view class="docs-text">4. 形状使用：星形比其他形状更消耗性能，大量使用时注意性能影响</view>
       <view class="docs-text">5. 使用场景：适合作为庆祝、成就达成、游戏胜利等关键时刻的视觉强化</view>
+      <view class="docs-text">6. 优化低端设备：在低端设备可降低粒子数量与生命周期，提高流畅度</view>
       
       <view class="docs-subtitle">常见问题</view>
       <view class="qa-item">
         <view class="qa-question">Q: 为什么我的效果无法显示？</view>
-        <view class="qa-answer">A: 请确保在页面的JSON文件中正确注册了组件，并且组件ID与JS中获取的一致。</view>
+        <view class="qa-answer">A: 请确保在页面的JSON文件中正确注册了组件，并且组件ID与JS中获取的一致。确保基础库版本≥2.9.0。</view>
       </view>
       <view class="qa-item">
         <view class="qa-question">Q: 如何让效果覆盖整个屏幕？</view>
-        <view class="qa-answer">A: 在样式中将canvas设为固定定位并设置宽高为100%，同时在组件初始化时设置正确的屏幕尺寸。</view>
+        <view class="qa-answer">A: 在样式中将canvas设为固定定位并设置宽高为100%，同时在组件初始化时设置正确的屏幕尺寸。使用wx.getWindowInfo()获取准确的窗口大小。</view>
       </view>
       <view class="qa-item">
         <view class="qa-question">Q: 效果能持续多久？</view>
         <view class="qa-answer">A: 默认生命周期为200帧，约3-4秒。可通过ticks参数调整持续时间。</view>
       </view>
       <view class="qa-item">
-        <view class="qa-question">Q: 如何在特定元素上方触发效果？</view>
-        <view class="qa-answer">A: 获取元素相对于屏幕的位置，然后计算出origin的x和y值（0-1范围内的比例值）。</view>
+        <view class="qa-question">Q: 真机上的canvas不显示或被覆盖怎么办？</view>
+        <view class="qa-answer">A: 本组件已解决该问题。确保canvas的position为fixed，z-index足够高，并添加了class="confetti-canvas"。</view>
       </view>
+      <view class="qa-item">
+        <view class="qa-question">Q: 如何避免使用已废弃的API警告？</view>
+        <view class="qa-answer">A: 本组件已采用新API，请参考基础库文档，使用wx.getDeviceInfo()替代wx.getSystemInfoSync()等。</view>
+      </view>
+      <view class="qa-item">
+        <view class="qa-question">Q: 如何在特定元素上方触发效果？</view>
+        <view class="qa-answer">A: 获取元素相对于屏幕的位置，然后计算出origin的x和y值（0-1范围内的比例值）。示例代码已在文档中提供。</view>
+      </view>
+      
+      <view class="docs-subtitle">开源许可</view>
+      <view class="docs-text">本组件使用MIT许可证开源，详情请参阅项目根目录下的LICENSE文件。</view>
+      <view class="docs-text">基于canvas-confetti库改写适配微信小程序。</view>
     </view>
   </view>
 </scroll-view>

@@ -18,7 +18,7 @@
   left: 0;
   width: 100%;
   height: 100vh;
-  z-index: 999;
+  z-index: 9999;
   pointer-events: none; /* 确保canvas不会阻挡点击事件 */
 }
 
@@ -98,6 +98,12 @@
   color: #666;
   margin-bottom: 12rpx;
   padding-left: 10rpx;
+}
+
+/* 高亮文本 */
+.highlight {
+  color: #4a90e2;
+  font-weight: bold;
 }
 
 /* 代码块 */
